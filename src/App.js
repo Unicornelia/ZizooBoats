@@ -1,23 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./images/zizoo-blue.svg";
+import "./App.css";
+import { FaPhoneAlt } from "react-icons/fa";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+      <header className="header">
+        <a href="/">
+          <img src={logo} className="header_top_logo" alt="zizoo-logo" />
         </a>
+        <span>The leading global boat rental platform</span>
+        <div className={"header_top_right"}>
+          <span style={{marginRight: '10px'}}>Mon-Sun: 9-9pm CET</span>
+          <FaPhoneAlt color="#014b67" size={20}/>
+          <span className="header_top_phone">+44 20 3318 3641</span>
+        </div>
       </header>
     </div>
   );
