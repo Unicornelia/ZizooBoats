@@ -8,7 +8,7 @@ export const TopWrapper = styled("div")(() => ({
 }));
 export const ContentWrapper = styled("div")(() => ({
   display: "grid",
-  gridTemplateColumns: "300px auto",
+  gridTemplateColumns: "400px auto",
   padding: "24px 0px"
 }));
 
@@ -23,12 +23,20 @@ export const Title = styled("h1")(() => ({
   maxWidth: "65vw"
 }));
 
+export const Label = styled("div")(() => ({
+  display: "flex",
+  justifyContent: "space-between"
+}));
+
 export const Filter = styled("div")(() => ({
   display: "flex",
-  margin: "20px 30px 10px 30px",
+  padding: "10px 30px 10px 60px",
   flexDirection: "column",
   position: "relative",
-  "& h1": {
+  "& h2": {
     paddingBottom: "20px"
+  },
+  "& h3": {
+    padding: "20px 0"
   }
 }));

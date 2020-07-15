@@ -1,17 +1,24 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import gql from "graphql-tag";
+import Slider from "rc-slider";
 import { useQuery } from "@apollo/react-hooks";
+
 import BoatsList from "../../components/BoatsList/BoatsList";
-import { Filter, TopWrapper, ContentWrapper, Title, Header } from "./styles";
+import {
+  Filter,
+  TopWrapper,
+  ContentWrapper,
+  Title,
+  Header,
+  Label
+} from "./styles";
 import Error from "../../components/Indicators/Error";
 import Loading from "../../components/Indicators/Loading";
 import "rc-slider/assets/index.css";
-import Slider from "rc-slider";
 
 export const GET_BOATS = gql`
-  query getBoats {
-    getBoats(input: { active: true }) {
+  query getBoats($input: GetBoatInput) {
+    getBoats(input: $input) {
       id
       name
       price
@@ -35,7 +42,10 @@ export const GET_BOATS = gql`
 `;
 
 const BoatsContainer = () => {
-  const { data, error, loading } = useQuery(GET_BOATS);
+  const { data, error, loading } = useQuery(GET_BOATS, {
+    variables: { input: { active: true } }
+  });
+
   const [sliderYearBegin, setSliderYearBegin] = useState(2004);
   const [sliderYearEnd, setSliderYearEnd] = useState(2020);
   const [sliderLengthBegin, setSliderLengthBegin] = useState(1);
@@ -77,42 +87,33 @@ const BoatsContainer = () => {
       </TopWrapper>
       <ContentWrapper>
         <Filter>
-          <h1>Filter</h1>
-          <label>
-            <h3 style={{ paddingBottom: "10px" }}>Year</h3>
-            <div style={{ paddingBottom: "40px" }}>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between"
-                }}
-              >
-                <div>2004</div>
-                <div>2020</div>
-              </div>
-              <Range
-                min={2004}
-                max={2020}
-                onChange={handleYearChange}
-                defaultValue={[sliderYearBegin, 2010, sliderYearEnd]}
-              />
-            </div>
-          </label>
-          <label>
-            <h3 style={{ paddingBottom: "10px" }}>Boat length</h3>
-            <div>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <div>1m</div>
-                <div>20m</div>
-              </div>
-              <Range
-                min={1}
-                max={20}
-                onChange={handleLengthChange}
-                defaultValue={[sliderLengthBegin, 15, sliderLengthEnd]}
-              />
-            </div>
-          </label>
+          <h2>Filter</h2>
+          <h3>Year</h3>
+          <div>
+            <Label>
+              <div>2004</div>
+              <div>2020</div>
+            </Label>
+            <Range
+              min={2004}
+              max={2020}
+              onChange={handleYearChange}
+              defaultValue={[sliderYearBegin, 2010, sliderYearEnd]}
+            />
+          </div>
+          <h3>Boat length</h3>
+          <div>
+            <Label>
+              <div>1m</div>
+              <div>20m</div>
+            </Label>
+            <Range
+              min={1}
+              max={20}
+              onChange={handleLengthChange}
+              defaultValue={[sliderLengthBegin, 15, sliderLengthEnd]}
+            />
+          </div>
         </Filter>
         <BoatsList boats={boats} />
       </ContentWrapper>
@@ -120,18 +121,6 @@ const BoatsContainer = () => {
   );
 };
 
-BoatsContainer.propTypes = {
-  boats: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      image: PropTypes.string.isRequired
-    })
-  )
-};
-
-BoatsContainer.defaultProps = {
-  boats: []
-};
+BoatsContainer.displayName = "BoatsContainer";
 
 export default BoatsContainer;
