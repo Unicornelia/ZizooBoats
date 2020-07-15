@@ -1,13 +1,19 @@
 import React from "react";
-import { Card, Content, ContentRow } from "./styles";
+import { GiShipWheel } from "react-icons/gi";
+import { IoMdPeople, IoIosBoat } from "react-icons/io";
 import { transformEnum } from "../../helpers/transformEnum";
 import StarRating from "../StarRating/StarRating";
-import { IoMdPeople, IoIosBoat } from "react-icons/io";
-import { GiShipWheel } from "react-icons/gi";
+import {
+  Button,
+  Card,
+  Content,
+  ContentRow,
+  CountryWrapper,
+  StarWrapper
+} from "./styles";
 
 const Boat = ({
   boat: {
-    id,
     name,
     length,
     year,
@@ -18,16 +24,15 @@ const Boat = ({
     price,
     reviews: { score },
     skipper,
-    guests
+    guests,
+    active
   }
 }) => {
   return (
     <li>
       <>
         <Card>
-          <a href={`/details/${id}`}>
-            <img src={imageUrl} alt="displayed cooked food" />
-          </a>
+          <img src={imageUrl} alt="displayed cooked food" />
           <Content>
             <ContentRow>
               <div id="left">
@@ -40,15 +45,13 @@ const Boat = ({
               </div>
             </ContentRow>
             <ContentRow>
-              <div style={{ display: "flex", color: "#7e7e7e" }}>
-                <StarRating rating={score} />{" "}
+              <StarWrapper>
+                <StarRating rating={score} />
                 <div style={{ paddingLeft: "5px" }}>
                   <i>Read reviews</i>
                 </div>
-              </div>
-              <div id="right" style={{ color: "#7e7e7e" }}>
-                {country}
-              </div>
+              </StarWrapper>
+              <CountryWrapper>{country}</CountryWrapper>
             </ContentRow>
             <ContentRow>
               <div id="left">
@@ -56,13 +59,15 @@ const Boat = ({
                   <IoIosBoat /> Skipper: {transformEnum(skipper)}
                 </p>
               </div>
-              <div id="right">Length: {length}</div>
+              <div id="right">Length: {length}m</div>
             </ContentRow>
             <ContentRow>
               <div id="left">
                 <GiShipWheel /> Cabins: {cabins}
               </div>
-              <div id="right">Instant booking</div>
+              <div id="right" style={{ color: "#23ae56" }}>
+                Instant booking
+              </div>
             </ContentRow>
             <ContentRow>
               <div id="left">
@@ -72,17 +77,8 @@ const Boat = ({
             <ContentRow>
               <div />
               <div>
-                <button
-                  style={{
-                    borderRadius: "3px",
-                    border: "none",
-                    padding: "7px",
-                    backgroundColor: "#49b8c5",
-                    color: "white"
-                  }}
-                >
-                  View Details >
-                </button>
+                <p>{active}</p>
+                <Button>View Details ></Button>
               </div>
             </ContentRow>
           </Content>
@@ -91,5 +87,7 @@ const Boat = ({
     </li>
   );
 };
+
+Boat.displayName = "Boat";
 
 export default Boat;

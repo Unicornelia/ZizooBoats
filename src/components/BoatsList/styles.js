@@ -8,5 +8,6 @@ export const List = styled("ul")(() => ({
   columnGap: "30px",
   rowGap: "30px",
   paddingTop: "16px",
-  borderTop: "#e4e4e4 1px solid"
+  borderTop: "#e4e4e4 1px solid",
+  textAlign: "-webkit-center"
 }));

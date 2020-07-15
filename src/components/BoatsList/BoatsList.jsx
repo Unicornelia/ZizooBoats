@@ -14,4 +14,6 @@ const BoatsList = ({ boats }) => {
   );
 };
 
+BoatsList.displayName = "BoatsList";
+
 export default BoatsList;

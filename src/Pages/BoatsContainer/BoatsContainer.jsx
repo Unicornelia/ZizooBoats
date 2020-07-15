@@ -43,12 +43,12 @@ export const GET_BOATS = gql`
 
 const BoatsContainer = () => {
   const { data, error, loading } = useQuery(GET_BOATS, {
-    variables: { input: { active: true } }
+    variables: { input: { active: false } }
   });
 
   const [sliderYearBegin, setSliderYearBegin] = useState(2004);
   const [sliderYearEnd, setSliderYearEnd] = useState(2020);
-  const [sliderLengthBegin, setSliderLengthBegin] = useState(1);
+  const [sliderLengthBegin, setSliderLengthBegin] = useState(0);
   const [sliderLengthEnd, setSliderLengthEnd] = useState(20);
 
   const createSliderWithTooltip = Slider.createSliderWithTooltip;
@@ -64,11 +64,11 @@ const BoatsContainer = () => {
     setSliderLengthEnd(sliderValues[1]);
   };
 
-  const boats = data?.getBoats
+  const filteredBoats = data?.getBoats
     .filter(
-      boat => boat.length > sliderLengthBegin && boat.length <= sliderLengthEnd
+      boat => boat.length >= sliderLengthBegin && boat.length <= sliderLengthEnd
     )
-    .filter(boat => boat.year > sliderYearBegin && boat.year <= sliderYearEnd);
+    .filter(boat => boat.year >= sliderYearBegin && boat.year <= sliderYearEnd);
 
   if (error) {
     return <Error>Error! {error.message}</Error>;
@@ -104,18 +104,22 @@ const BoatsContainer = () => {
           <h3>Boat length</h3>
           <div>
             <Label>
-              <div>1m</div>
+              <div>0m</div>
               <div>20m</div>
             </Label>
             <Range
-              min={1}
+              min={0}
               max={20}
               onChange={handleLengthChange}
               defaultValue={[sliderLengthBegin, 15, sliderLengthEnd]}
             />
           </div>
+          <p style={{ paddingTop: "20px" }}>
+            {`Showing ${filteredBoats.length} results out of
+            ${data?.getBoats.length}`}
+          </p>
         </Filter>
-        <BoatsList boats={boats} />
+        <BoatsList boats={filteredBoats} />
       </ContentWrapper>
     </>
   );

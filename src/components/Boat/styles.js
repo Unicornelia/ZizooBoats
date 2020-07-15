@@ -9,7 +9,7 @@ export const Card = styled("div")(() => ({
   borderRadius: "0.5rem",
   position: "relative",
   overflow: "hidden",
-  height: "220px",
+  height: "225px",
   width: "720px",
   boxShadow: "0 1px 4px 0 rgba(0,0,0,.1)",
   "& img": {
@@ -21,7 +21,7 @@ export const Card = styled("div")(() => ({
 
 export const ContentRow = styled("div")(() => ({
   display: "grid",
-  paddingBottom: "14px",
+  paddingBottom: "10px",
   gridTemplateColumns: "minmax(200px, 1fr) minmax(100px, 1fr)",
   "& #left": {
     textAlign: "left"
@@ -34,8 +34,10 @@ export const ContentRow = styled("div")(() => ({
 export const Content = styled("div")(() => ({
   padding: "16px",
   fontSize: "12px",
+  display: "grid",
+  gridTemplateRows: "auto 50px",
   "& h5": {
-    color: "#49b8c5",
+    color: "#1ca3d6",
     fontWeight: "600",
     fontSize: "16px",
     letterSpacing: "0",
@@ -50,4 +52,23 @@ export const Content = styled("div")(() => ({
     paddingBottom: "4px",
     transition: "all .25s"
   }
+}));
+
+export const StarWrapper = styled("div")(() => ({
+  display: "flex",
+  color: "#7e7e7e"
+}));
+
+export const CountryWrapper = styled("div")(() => ({
+  color: "#7e7e7e",
+  textAlign: "right"
+}));
+
+export const Button = styled("div")(() => ({
+  borderRadius: "3px",
+  border: "none",
+  padding: "8px",
+  backgroundColor: "#1ca3d6",
+  color: "white",
+  fontWeight: 600
 }));
