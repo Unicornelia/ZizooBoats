@@ -2,6 +2,7 @@ import React from "react";
 import logo from "./images/zizoo-blue.svg";
 import "./App.css";
 import { FaPhoneAlt } from "react-icons/fa";
+import BoatsContainer from './Pages/BoatsContainer/BoatsContainer'
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <span className="header_top_phone">+44 20 3318 3641</span>
         </div>
       </header>
+      <BoatsContainer />
     </div>
   );
 }
