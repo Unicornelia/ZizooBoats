@@ -2,8 +2,8 @@ const gql = require("graphql-tag");
 const { GraphQLDataSource } = require("apollo-datasource-graphql");
 
 const BOATS = gql`
-  query {
-    getBoats {
+  query getBoats($input: GetBoatInput) {
+    getBoats(input: $input) {
       id
       name
       type
@@ -33,8 +33,15 @@ class BoatsAPI extends GraphQLDataSource {
   }
 
   async getBoats() {
-    const response = await this.query(BOATS);
-    return response.data.getBoats;
+    try {
+      const response = await this.query(BOATS, {
+        variables: { input: { active: true } }
+      });
+      return response.data.getBoats;
+    } catch (error) {
+      console.error(error);
+    }
   }
 }
+
 module.exports = BoatsAPI;
