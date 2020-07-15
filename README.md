@@ -1,6 +1,6 @@
 # Zizoo Boats
 
-## How to run the app?``
+## How to run the app?
 
 ### For the frontend:
 
