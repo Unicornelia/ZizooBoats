@@ -14,7 +14,7 @@ const Root = () => {
     <ErrorBoundary>
         <Router history={history}>
           <Switch>
-            <Route exact path={'/search'} component={App} />
+            <Route exact path={'/'} component={App} />
           </Switch>
         </Router>
     </ErrorBoundary>
